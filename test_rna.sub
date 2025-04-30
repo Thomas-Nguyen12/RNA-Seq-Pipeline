@@ -1,0 +1,34 @@
+#!/bin/bash
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=wmp21vtu@uea.ac.uk
+#SBATCH -p compute-64-512
+#SBATCH --time=7-00:00
+#SBATCH --mem=400G
+#SBATCH --job-name=test_rna
+#SBATCH -o test_rna-%j.out
+#SBATCH -e test_rna-%j.err
+
+# This example will run for all stem and evt samples I used
+
+# SRR19383343_1.fastq.gz
+# SRR19383343_2.fastq.gz
+# SRR19383344_1.fastq.gz
+# SRR19383344_2.fastq.gz
+# SRR19383351_1.fastq.gz
+# SRR19383351_2.fastq.gz
+
+# input directory = /gpfs/home/wmp21vtu/scratch/rna/rna_seq_data
+
+
+
+for sample in {43..44} 
+do
+	bash /gpfs/home/wmp21vtu/pipeline/rna_seq/rna_pipeline.sh -i /gpfs/home/wmp21vtu/scratch/rna/rna_seq_data/ -n SRR193833${sample} -o /gpfs/home/wmp21vtu/scratch/rna/test_run/ -r /gpfs/home/wmp21vtu/scratch/reference_genome_hg38_86/gencode.v25.transcripts.fa 
+done 
+
+for sample in {51..51}
+do
+	bash /gpfs/home/wmp21vtu/pipeline/rna_seq/rna_pipeline.sh -i /gpfs/home/wmp21vtu/scratch/rna/rna_seq_data/ -n SRR193833${sample} -o /gpfs/home/wmp21vtu/scratch/rna/test_run/ -r /gpfs/home/wmp21vtu/scratch/reference_genome_hg38_86/gencode.v25.transcripts.fa 
+done
+
+

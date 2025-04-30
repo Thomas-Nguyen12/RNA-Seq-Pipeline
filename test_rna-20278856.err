@@ -1,0 +1,54 @@
+Can not open /gpfs/home/wmp21vtu/scratch/rna/rna_seq_data//SRR19383343 for reading
+
+[build] loading fasta file /gpfs/home/wmp21vtu/scratch/reference_genome_hg38_86/gencode.v25.transcripts.fa
+[build] k-mer length: 31
+[build] warning: clipped off poly-A tail (longer than 10)
+        from 1524 target sequences
+[build] warning: replaced 86 non-ACGUT characters in the input sequence
+        with pseudorandom nucleotides
+[build] counting k-mers ... done.
+[build] building target de Bruijn graph ...  done 
+[build] creating equivalence classes ...  done
+[build] target de Bruijn graph has 1264597 contigs and contains 124730703 k-mers 
+
+
+Error: file not found /gpfs/home/wmp21vtu/scratch/rna/test_run//SRR19383343_1-trimmed.fastq
+Error: file not found /gpfs/home/wmp21vtu/scratch/rna/rna_seq_data//SRR19383343_2-trimmed.fastq
+Error: need to specify output directory 
+
+Can not open /gpfs/home/wmp21vtu/scratch/rna/rna_seq_data//SRR19383344 for reading
+
+[build] loading fasta file /gpfs/home/wmp21vtu/scratch/reference_genome_hg38_86/gencode.v25.transcripts.fa
+[build] k-mer length: 31
+[build] warning: clipped off poly-A tail (longer than 10)
+        from 1524 target sequences
+[build] warning: replaced 86 non-ACGUT characters in the input sequence
+        with pseudorandom nucleotides
+[build] counting k-mers ... done.
+[build] building target de Bruijn graph ...  done 
+[build] creating equivalence classes ...  done
+[build] target de Bruijn graph has 1264597 contigs and contains 124730703 k-mers 
+
+
+Error: file not found /gpfs/home/wmp21vtu/scratch/rna/test_run//SRR19383344_1-trimmed.fastq
+Error: file not found /gpfs/home/wmp21vtu/scratch/rna/rna_seq_data//SRR19383344_2-trimmed.fastq
+Error: need to specify output directory 
+
+Can not open /gpfs/home/wmp21vtu/scratch/rna/rna_seq_data//SRR19383351 for reading
+
+[build] loading fasta file /gpfs/home/wmp21vtu/scratch/reference_genome_hg38_86/gencode.v25.transcripts.fa
+[build] k-mer length: 31
+[build] warning: clipped off poly-A tail (longer than 10)
+        from 1524 target sequences
+[build] warning: replaced 86 non-ACGUT characters in the input sequence
+        with pseudorandom nucleotides
+[build] counting k-mers ... done.
+[build] building target de Bruijn graph ...  done 
+[build] creating equivalence classes ...  done
+[build] target de Bruijn graph has 1264597 contigs and contains 124730703 k-mers 
+
+
+Error: file not found /gpfs/home/wmp21vtu/scratch/rna/test_run//SRR19383351_1-trimmed.fastq
+Error: file not found /gpfs/home/wmp21vtu/scratch/rna/rna_seq_data//SRR19383351_2-trimmed.fastq
+Error: need to specify output directory 
+
