@@ -26,7 +26,7 @@ echo "\n"
 
 ## Trimming (skewer) 
 echo "Trimming reads with skewer..."
-skewer -r 0.1 -d 0.03 --min 18 ${input_directory}/${sample_name} -o ${output_directory}/${sample_name}	
+skewer -r 0.1 -d 0.03 --min 18 ${input_directory}/${sample_name}_1.fastq.gz ${input_directory}/${sample_name}_2.fastq.gz -o ${output_directory}/${sample_name}	
 
 # Stage 2: Read Quantification (kallisto) 
 
@@ -38,10 +38,11 @@ kallisto index -i ${output_directory}/GRCh38.idx $reference
 
 ## Quantiifcation algorithm (reference and then index)
 echo "Quantifying reads with Kallisto..."
-kallisto quant -i ${output_directory}/GRCh38.idx 	${output_directory}/${sample_name}_1-trimmed.fastq ${input_directory}/${sample_name}_2-trimmed.fastq
 
-# the next stages would then be diffbind
+# Format: SRR19383351-trimmed-pair1.fastq
 
-# reference = /gpfs/home/wmp21vtu/scratch/reference_genome_hg38_86/gencode.v25.transcripts.fa
+kallisto quant -i ${output_directory}/GRCh38.idx ${output_directory}/${sample_name}-trimmed-pair1.fastq ${output_directory}/${sample_name}-trimmed-pair2.fastq -o ${output_directory} 
+
+
 
 
