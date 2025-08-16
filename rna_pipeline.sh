@@ -1,19 +1,26 @@
 #!/bin/bash
 
-while getopts "n:i:o:r:" opt; do
-	case $opt in
-		n) sample_name="$OPTARG" ;;
-		i) input_directory="$OPTARG" ;;
-		o) output_directory="$OPTARG" ;;
-		r) reference="$OPTARG" ;;
-		?) echo "This tool is used for RNA-seq analysis. It requires the following parameters:" 
-			echo "Usage: $0 -i <input_dir> -o <output_dir> -r <reference> -n <sample_name>"
-			exit 1 
-			;;
-		
-		
-	esac
+d=0
+while getopts "n:i:o:r:d:s:" opt; do
+    case $opt in
+        n) sample_name="$OPTARG" ;;
+        i) input_directory="$OPTARG" ;;
+        o) output_directory="$OPTARG" ;;
+        r) reference="$OPTARG" ;;
+        s) sample_sheet="$OPTARG" ;;
+        d) diffbind_enabled="$OPTARG"
+           if [ "$diffbind_enabled" -ne 0 ] && [ "$diffbind_enabled" -ne 1 ]; then
+               echo "ERROR. -d only accepts a 1 <enabled (default)> or a 0 <disabled>"
+               exit 1
+           fi
+           ;;
+        ?) echo "This tool is used for RNA-seq analysis. It requires the following parameters:" 
+           echo "Usage: $0 -i <input_dir> -o <output_dir> -r <reference> -n <sample_name> -d <enable diffbind>"
+           exit 1
+           ;;
+    esac
 done
+
 start_date=$(date) 
 echo "Start date: $start_date" 
 
@@ -25,12 +32,6 @@ echo "----------------------"
 echo "\n"
 
 # ---- Implementing a function for exception handling 
-
-
-
-
-
-
 # Stage 1: Preprocessing
 
 ## Trimming (skewer) 
@@ -94,3 +95,31 @@ mv ${output_directory}/${sample_name}* ${output_directory}/results_${sample_name
 
 echo "The program is now complete!"
 
+
+sample_sheet_length=$(wc -l < $sample_sheet) 
+
+
+count=0
+while IFS= read -r sample; do
+    if find "${output_directory}/results_${sample_name}" -name "abundance.h5" | grep -q .; then
+        echo "[COMPLETE]    $sample"
+        ((count++))
+    else
+        echo "[PENDING]    $sample"
+    fi
+done < <(awk -F',' 'NR>1 {print $1}' "$sample_sheet")
+
+if [ ${count} -eq ${sample_sheet_length} ]; then
+	echo "All Samples Processed. Proceeding..."
+	if [ $diffbind_enabled -eq 1 ]; then
+	 	echo "Executing DESeq2..." 
+		Rscript ~/pipeline/rna_seq/diff_expression.R ${sample_sheet} ${output_directory}
+	else
+		echo "DESeq2 Disabled. Exiting..."
+		exit 0
+	fi 
+else
+	echo "Samples not ready for DESeq2. Pending..."
+	# at this point, the sample is completely processed.
+	exit 0 
+fi
